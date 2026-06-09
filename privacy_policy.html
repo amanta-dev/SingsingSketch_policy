@@ -517,9 +517,9 @@
     </div>
 
     <script>
-      // 모바일 웹뷰에서 event.target 이 일관성 없게 동작하는 문제 회피
-      // → 호출부에서 this 를 직접 전달
-      function show(lang, btn) {
+      // 언어 선택 — 섹션 + 탭 버튼 활성화. lang: ko/en/zh/ja/hi
+      function selectLang(lang) {
+        if (!lang || !document.getElementById(lang)) return false;
         document
           .querySelectorAll(".lang-section")
           .forEach((el) => el.classList.remove("active"));
@@ -527,8 +527,31 @@
           .querySelectorAll(".lang-tabs button")
           .forEach((el) => el.classList.remove("active"));
         document.getElementById(lang).classList.add("active");
-        btn.classList.add("active");
+        // 해당 언어 탭 버튼 찾아서 활성화 (onclick="show('en', ...)")
+        var btn = document.querySelector(
+          ".lang-tabs button[onclick*=\"'" + lang + "'\"]",
+        );
+        if (btn) btn.classList.add("active");
+        return true;
       }
+
+      // 탭 클릭 시
+      function show(lang) {
+        selectLang(lang);
+      }
+
+      // 페이지 로드 시 URL 해시로 언어 자동 선택 (#en, #ja 등)
+      // 앱에서 현재 선택 언어를 #코드로 붙여 열어줌. 없거나 모르면 한국어.
+      (function () {
+        var lang = (location.hash || "").replace("#", "").toLowerCase();
+        if (!selectLang(lang)) selectLang("ko");
+      })();
+
+      // 해시가 바뀌면(드물게) 다시 반영
+      window.addEventListener("hashchange", function () {
+        var lang = (location.hash || "").replace("#", "").toLowerCase();
+        selectLang(lang);
+      });
     </script>
   </body>
 </html>
