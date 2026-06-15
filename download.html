@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>싱싱 스케치 — 노래 색칠놀이 다운로드</title>
+    <meta
+      name="description"
+      content="500만 유튜브 잉글리시 씽씽이 만든 우리 아이 첫 색칠놀이!"
+    />
+    <meta property="og:title" content="싱싱 스케치 : 노래 색칠놀이" />
+    <meta
+      property="og:description"
+      content="노래를 들으며 색칠하는 우리 아이 첫 스케치북"
+    />
+    <style>
+      :root {
+        --y: #ffc629;
+        --y2: #ffb300;
+        --ink: #4c2a0c;
+        --card: #ffffff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR",
+          sans-serif;
+        background: linear-gradient(160deg, #ffe7a3 0%, var(--y) 55%, var(--y2) 100%);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .card {
+        width: 100%;
+        max-width: 380px;
+        background: var(--card);
+        border-radius: 28px;
+        padding: 34px 28px 30px;
+        text-align: center;
+        box-shadow: 0 18px 50px rgba(76, 42, 12, 0.18);
+      }
+      /* 앱 아이콘 — 구글처럼 가장자리 둥근 사각형 */
+      .logo {
+        width: 104px;
+        height: 104px;
+        border-radius: 24px;
+        display: block;
+        margin: 0 auto 14px;
+        box-shadow: 0 8px 20px rgba(76, 42, 12, 0.22);
+        object-fit: cover;
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .sub {
+        font-size: 14px;
+        color: #8a6a3a;
+        margin-bottom: 26px;
+        line-height: 1.5;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px 18px;
+        margin-top: 12px;
+        border-radius: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #fff;
+        background: #1f1f1f;
+        transition:
+          transform 0.08s ease,
+          box-shadow 0.2s ease;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+      }
+      .btn:active {
+        transform: translateY(1px) scale(0.99);
+      }
+      .btn .ico {
+        font-size: 20px;
+      }
+      .btn.play {
+        background: #00875f;
+      }
+      .hint {
+        margin-top: 22px;
+        font-size: 12px;
+        color: #b08a4f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <!-- icon.svg 를 download.html 과 같은 폴더에 함께 업로드하세요 -->
+      <img class="logo" src="icon.svg" alt="싱싱 스케치 아이콘" />
+      <h1>싱싱 스케치</h1>
+      <p class="sub">노래를 들으며 색칠하는<br />우리 아이 첫 스케치북</p>
+
+      <a
+        class="btn apple"
+        id="appleBtn"
+        href="https://apps.apple.com/app/id6778304259"
+      >
+        <span class="ico"></span>
+        App Store
+      </a>
+      <a
+        class="btn play"
+        id="playBtn"
+        href="https://play.google.com/store/apps/details?id=com.amanta.SingsingSketch"
+      >
+        <span class="ico">▶</span>
+        Google Play
+      </a>
+
+      <p class="hint" id="hint">기기에 맞는 스토어로 이동합니다…</p>
+    </div>
+
+    <script>
+      (function () {
+        var APPLE = "https://apps.apple.com/app/id6778304259";
+        var GOOGLE =
+          "https://play.google.com/store/apps/details?id=com.amanta.SingsingSketch";
+        var ua = navigator.userAgent || navigator.vendor || "";
+
+        var isIOS =
+          /iPad|iPhone|iPod/.test(ua) ||
+          // iPadOS 13+ 는 Mac 으로 보고됨 → 터치 지원으로 보정
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        var isAndroid = /android/i.test(ua);
+
+        var hint = document.getElementById("hint");
+
+        if (isIOS) {
+          hint.textContent = "App Store 로 이동합니다…";
+          window.location.replace(APPLE);
+        } else if (isAndroid) {
+          hint.textContent = "Google Play 로 이동합니다…";
+          window.location.replace(GOOGLE);
+        } else {
+          hint.textContent = "사용 중인 기기의 스토어를 선택하세요.";
+        }
+      })();
+    </script>
+  </body>
+</html>
